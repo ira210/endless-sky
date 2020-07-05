@@ -39,8 +39,8 @@ namespace {
 
 
 // Constructor.
-Hardpoint::Hardpoint(const Point &point, bool isTurret, const Outfit *outfit)
-	: outfit(outfit), point(point * .5), isTurret(isTurret)
+Hardpoint::Hardpoint(const Point &point, bool isTurret, bool isFixedAngle, const Angle &fixedAngle, const Outfit *outfit)
+	: outfit(outfit), point(point * .5), isTurret(isTurret), isFixedAngle(isFixedAngle), fixedAngle(fixedAngle)
 {
 }
 
@@ -92,6 +92,14 @@ Angle Hardpoint::HarmonizedAngle() const
 bool Hardpoint::IsTurret() const
 {
 	return isTurret;
+}
+
+
+
+// Find out if this is a fixed angle hardpoint (whether or not it fires e.g. broadside).
+bool Hardpoint::IsFixedAngle() const
+{
+	return isFixedAngle;
 }
 
 
@@ -264,11 +272,17 @@ void Hardpoint::Install(const Outfit *outfit)
 		
 		// For fixed weapons, apply "gun harmonization," pointing them slightly
 		// inward so the projectiles will converge. For turrets, start them out
-		// pointing outward from the center of the ship.
-		if(!isTurret)
-			angle = HarmonizedAngle();
+		// pointing outward from the center of the ship. For fixed angle
+		// hardpoints, point in that fixed angle.
+		if(isFixedAngle)
+			angle = fixedAngle;
 		else
-			angle = Angle(point);
+		{
+			if(!isTurret)
+				angle = HarmonizedAngle();
+			else
+				angle = Angle(point);
+		}
 	}
 }
 
