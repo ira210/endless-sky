@@ -40,7 +40,7 @@ namespace {
 
 // Constructor.
 Hardpoint::Hardpoint(const Point &point, bool isTurret, bool isFixedAngle, const Angle &fixedAngle, const Outfit *outfit)
-	: outfit(outfit), point(point * .5), isTurret(isTurret), isFixedAngle(isFixedAngle), fixedAngle(fixedAngle)
+	: point(point * .5), isTurret(isTurret), isFixedAngle(isFixedAngle), fixedAngle(fixedAngle), outfit(outfit)
 {
 }
 
