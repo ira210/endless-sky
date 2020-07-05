@@ -30,16 +30,18 @@ class Visual;
 // This class handles the logic for a ship's set of weapons. All weapons of the
 // same type coordinate their fire with each other, either firing in clusters
 // (if the projectiles are vulnerable to anti-missile) or in a "stream" where
-// the guns take turns firing. Instead of firing straight, guns (that is, non-
-// turreted weapons) fire aimed slightly inward in a convergence pattern so
+// the guns take turns firing. Instead of firing straight, normalguns (that is, 
+// non-turreted weapons) fire aimed slightly inward in a convergence pattern so
 // that even if the guns are spaced out horizontally on the ship, their
 // projectiles will nearly meet at the end of their range. This class also
 // handles turrets, which aim automatically and take into account the target's
-// distance away and velocity relative to the ship that is firing.
+// distance away and velocity relative to the ship that is firing, and fixed 
+// angle guns which fire at fixed angles, e.g. for side- or rear-shooting guns.
 class Armament {
 public:
 	// Add a gun or turret hard-point.
 	void AddGunPort(const Point &point, const Outfit *outfit = nullptr);
+    void AddGunPort(const Point &point, const Angle &fixedAngle, const Outfit *outfit = nullptr);
 	void AddTurret(const Point &point, const Outfit *outfit = nullptr);
 	// This must be called after all the outfit data is loaded. If you add more
 	// of a given weapon than there are slots for it, the extras will not fire.

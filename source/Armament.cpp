@@ -30,6 +30,10 @@ void Armament::AddGunPort(const Point &point, const Outfit *outfit)
 {
 	hardpoints.emplace_back(point, false, outfit);
 }
+void Armament::AddGunPort(const Point &point, const Angle &fixedAngle, const Outfit *outfit)
+{
+	hardpoints.emplace_back(point, false, outfit,fixedAngle, true);
+}
 
 
 

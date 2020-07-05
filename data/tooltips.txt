@@ -123,7 +123,7 @@ tip "fuel protection:"
 	`Protection against weapons that deal fuel damage. If you add more than one outfit with this attribute, each additional one is less effective: a total value of 1 results in a 1 percent reduction in fuel damage, while a total value of 11 only results in a 10 percent reduction.`
 
 tip "gun ports needed:"
-	`This weapon uses up a gun port. Guns always fire straight forward; turrets fire in the direction of your currently selected target.`
+	`This weapon uses up a gun port. Guns always fire in a fixed direction, usually straight forward; turrets fire in the direction of your currently selected target.`
 
 tip "gun ports free:"
 	`How many guns this ship can hold. This includes most missiles and secondary weapons that fire straight forward.`

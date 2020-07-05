@@ -227,8 +227,12 @@ void Ship::Load(const DataNode &node)
 			if(child.Size() >= 3)
 			{
 				hardpoint = Point(child.Value(1), child.Value(2));
-				if(child.Size() >= 4)
+				if(child.Size() >= 4){
 					outfit = GameData::Outfits().Get(child.Token(3));
+                    if(child.Size() >= 5){
+                        angle = Angle(child.Value(4));
+                    }
+                }
 			}
 			else
 			{
@@ -238,7 +242,10 @@ void Ship::Load(const DataNode &node)
 			if(outfit)
 				++equipped[outfit];
 			if(key == "gun")
-				armament.AddGunPort(hardpoint, outfit);
+                if(child.Size() >= 5)
+                    armament.AddGunPort(hardpoint, angle, outfit);
+                else
+                    armament.AddGunPort(hardpoint, outfit);
 			else
 				armament.AddTurret(hardpoint, outfit);
 			// Print a warning for the first hardpoint after 32, i.e. only 1 warning per ship.
