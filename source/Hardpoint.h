@@ -30,7 +30,7 @@ class Visual;
 class Hardpoint {
 public:
 	// Constructor. Hardpoints may or may not specify what weapon is in them.
-	Hardpoint(const Point &point, bool isTurret, const Outfit *outfit = nullptr);
+	Hardpoint(const Point &point, bool isTurret, bool isFixedAngle = false, const Angle fixedAngle &fixedangle = Angle(0), const Outfit *outfit = nullptr);
 	
 	// Get the weapon installed in this hardpoint (or null if there is none).
 	const Outfit *GetOutfit() const;
@@ -44,6 +44,7 @@ public:
 	Angle HarmonizedAngle() const;
 	// Shortcuts for querying weapon characteristics.
 	bool IsTurret() const;
+	bool IsFixedAngle() const;
 	bool IsHoming() const;
 	bool IsAntiMissile() const;
 	bool CanAim() const;
@@ -88,11 +89,15 @@ private:
 	Point point;
 	// Angle adjustment for convergence.
 	Angle angle;
+	// Angle for fixed angle gun
+	Angle fixedAngle;
+	
 	// Reload timers and other attributes.
 	double reload = 0.;
 	double burstReload = 0.;
 	int burstCount = 0;
 	bool isTurret = false;
+	bool isFixedAngle = false;
 	bool isFiring = false;
 	bool wasFiring = false;
 };
